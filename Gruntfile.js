@@ -29,31 +29,31 @@ module.exports = function (grunt) {
 				files: [
 					'<%= cfg.src %>/**/**/*.js',
 					'!<%= cfg.src %>/bower_components/**/*.js',
-					'!<%= cfg.src %>/**/**/*.spec.js',
+					'!<%= cfg.src %>/test/**/*.spec.js',
 					'!<%= cfg.src %>/**/**/*.mock.js',
-					'!<%= cfg.src %>/pages/app.js'
+					'!<%= cfg.src %>/scripts/app.js'
 				],
-				tasks: ['injector:scripts', 'injector:pages']
+				tasks: ['injector:scripts']
 			},
 			injectCss: {
 				files: [
 					'<%= cfg.src %>/**/*.css'
 				],
-				tasks: ['injector:css', 'injector:pagecss']
+				tasks: ['injector:css']
 			},
 			bower: {
 				files: ['bower.json'],
 				tasks: ['wiredep']
 			},
 			js: {
-				files: ['<%= cfg.src %>/{pages, components}/{,**/}*.js', '!<%= cfg.src %>/pages/**/*.spec.js'],
+				files: ['<%= cfg.src %>/{,**/}*.js', '!<%= cfg.src %>/**/*.spec.js'],
 				tasks: ['newer:jshint:all'],
 				options: {
 					livereload: '<%= connect.options.livereload %>'
 				}
 			},
 			jsTest: {
-				files: ['<%= cfg.src %>/pages/**/*.spec.js'],
+				files: ['<%= cfg.src %>/**/*.spec.js'],
 				tasks: ['newer:jshint:test', 'karma']
 			},
 			styles: {
@@ -75,7 +75,7 @@ module.exports = function (grunt) {
 					'<%= cfg.src %>/{,**/}*.js',
 					'<%= cfg.src %>/{,**/}*.css',
 					'.tmp/{,*/}*.css',
-					'<%= cfg.src %>/assets/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+					'<%= cfg.src %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
 					'!<%= cfg.src %>/{,**/}*.{mock, spec}.js'
 				]
 			}
@@ -391,9 +391,9 @@ module.exports = function (grunt) {
 							'{.tmp,<%= cfg.src %>}/**/*.js',
 							'!<%= cfg.src %>/bower_components/**/*.js',
 							'!{.tmp,<%= cfg.src %>}/**/app.js',
-							'!<%= cfg.src %>/pages/**/*.{controller,directive,service}.js',
-							'!{.tmp,<%= cfg.src %>}/**/*.spec.js',
-							'!{.tmp,<%= cfg.src %>}/**/*.mock.js'
+							'!<%= cfg.src %>/**/*.{controller,directive,service}.js',
+							'!{.tmp,<%= cfg.src %>}/test/**/*.js',
+							'!{.tmp,<%= cfg.src %>}/mock/**/*.js'
 						]
 					]
 				}
@@ -422,7 +422,7 @@ module.exports = function (grunt) {
 		// Test settings
 		karma: {
 			unit: {
-				configFile: 'test/karma.conf.js',
+				configFile: 'karma.conf.js',
 				singleRun: true
 			}
 		}
