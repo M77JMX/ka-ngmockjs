@@ -186,7 +186,7 @@ module.exports = function (grunt) {
 			target: {
 				src: '<%= cfg.src %>/index.html',
 				ignorePath: '<%= cfg.src %>/',
-				exclude: [/bootstrap-sass-official/, /bootstrap.js/, '/json3/', '/es5-shim/']
+				exclude: [/bootstrap-sass-official/, '/json3/', '/es5-shim/']
 			}
 		},
 
@@ -391,7 +391,6 @@ module.exports = function (grunt) {
 							'{.tmp,<%= cfg.src %>}/**/*.js',
 							'!<%= cfg.src %>/bower_components/**/*.js',
 							'!{.tmp,<%= cfg.src %>}/**/app.js',
-							'!<%= cfg.src %>/**/*.{controller,directive,service}.js',
 							'!{.tmp,<%= cfg.src %>}/test/**/*.js',
 							'!{.tmp,<%= cfg.src %>}/mock/**/*.js'
 						]
@@ -436,8 +435,8 @@ module.exports = function (grunt) {
 
 		grunt.task.run([
 			'clean:server',
-			'wiredep',
 			'injector',
+			'wiredep',
 			'concurrent:server',
 			'autoprefixer:server',
 			'connect:livereload',

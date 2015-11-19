@@ -21,8 +21,8 @@ angular
 		])
 		.config(function ($stateProvider, $urlRouterProvider) {
 			$stateProvider
-					.state('/', {
-						url: '/',
+					.state('main', {
+						url: '/main',
 						templateUrl: 'views/main.html',
 						controller: 'MainCtrl'
 					})
@@ -37,6 +37,14 @@ angular
 						controller: 'MockCtrl'
 					});
 			$urlRouterProvider.otherwise(function ($injector, $location) {
-				$location.path('/');
+				$location.path('/main');
 			});
-		});
+		})
+		.run(['$httpBackend', 'MockService', function ($httpBackend, MockService) {
+
+			$httpBackend.whenGET(/views/).passThrough();
+
+			$httpBackend.whenPOST('/hello').respond(MockService.mock({
+				email: '@EMAIL'
+			}));
+		}]);
