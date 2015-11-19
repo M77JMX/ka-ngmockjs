@@ -14,26 +14,29 @@ angular
 			'ngCookies',
 			'ngMessages',
 			'ngResource',
-			'ngRoute',
+			'ui.router',
 			'ngSanitize',
-			'ngMock',
+			'ngMockE2E',
 			'ngTouch'
 		])
-		.config(function ($routeProvider) {
-			$routeProvider
-					.when('/', {
+		.config(function ($stateProvider, $urlRouterProvider) {
+			$stateProvider
+					.state('/', {
+						url: '/',
 						templateUrl: 'views/main.html',
 						controller: 'MainCtrl'
 					})
-					.when('/about', {
+					.state('about', {
+						url: '/about',
 						templateUrl: 'views/about.html',
 						controller: 'AboutCtrl'
 					})
-					.when('/mock', {
+					.state('mock', {
+						url: '/mock',
 						templateUrl: 'views/mock.html',
 						controller: 'MockCtrl'
-					})
-					.otherwise({
-						redirectTo: '/'
 					});
+			$urlRouterProvider.otherwise(function ($injector, $location) {
+				$location.path('/');
+			});
 		});
