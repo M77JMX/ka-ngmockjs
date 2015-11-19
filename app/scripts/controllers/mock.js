@@ -8,10 +8,8 @@
  * Controller of the ngMockApp
  */
 angular.module('ngMockApp')
-  .controller('MockCtrl', ['$scope', 'GetMockService', function ($scope, GetMockService) {
-    GetMockService.mock(/\.json/,{
-      'email': '@EMAIL'
-    });
+		.controller('MockCtrl', ['$scope', '$http', function ($scope, $http) {
+
     $scope.getMockData = function(){
       $.ajax({
         url: 'hello.json',
@@ -21,4 +19,15 @@ angular.module('ngMockApp')
         $scope.email = data.email;
       });
     };
+
+
+			$scope.postTest = function () {
+				$http.get('/hello', {
+					url: 'hello',
+					type: 'post',
+					dataType: 'json'
+				}).success(function (data) {
+					$scope.postemail = data.email;
+				});
+			};
   }]);
