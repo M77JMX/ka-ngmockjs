@@ -42,7 +42,7 @@ angular
 		})
 		.run(['$httpBackend', 'MockService', function ($httpBackend, MockService) {
 
-			$httpBackend.whenGET(/views/).passThrough();
+			$httpBackend.whenGET(/views | images | scripts | styles/).passThrough();
 
 			$httpBackend.whenPOST('/hello').respond(MockService.mock({
 				email: '@EMAIL'
